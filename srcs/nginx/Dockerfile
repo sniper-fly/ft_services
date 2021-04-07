@@ -26,4 +26,6 @@ RUN sed -i'.bak' 's/^#rc_sys=""/rc_sys="lxc"/' /etc/rc.conf \
 
 COPY srcs/entry-point.sh /
 
+COPY srcs/nginx.conf /etc/nginx/
+
 ENTRYPOINT [ "/entry-point.sh" ]
