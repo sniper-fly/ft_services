@@ -1,4 +1,4 @@
-minikube start --vm-drive=docker --extra-config=apiserver.service-node-port-range=1-65535
+minikube start --vm-driver=docker --extra-config=apiserver.service-node-port-range=1-65535
 
 #install MetalLB
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manifests/namespace.yaml
