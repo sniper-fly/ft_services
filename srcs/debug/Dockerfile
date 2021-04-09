@@ -8,7 +8,8 @@ RUN \
 	yum install -y \
 	iproute \
 	net-tools \
-	traceroute; \
+	traceroute \
+	nmap \
 	# curl -o /usr/local/bin/jq -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64; \
 	# chmod +x /usr/local/bin/jq; \
-	yum clean all
+	&& yum clean all
