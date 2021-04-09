@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: nginx
-    image: rnakai/nginx:v3 ##version管理要注意
+    image: rnakai/nginx:v3 ## TODO: version管理要注意
     imagePullPolicy: Never
 
 ---
