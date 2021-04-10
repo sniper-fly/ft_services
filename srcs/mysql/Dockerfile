@@ -17,6 +17,10 @@ RUN sed -i'.bak' 's/^#rc_sys=""/rc_sys="lxc"/' /etc/rc.conf \
     && mkdir /run/openrc \
     && touch /run/openrc/softlevel
 
+# mysqldのログ設定
+RUN touch /var/log/mysqld.log \
+	&& chmod 666 /var/log/mysqld.log
+
 COPY ./srcs/entry-point.sh /
 RUN chmod 755 /entry-point.sh
 
