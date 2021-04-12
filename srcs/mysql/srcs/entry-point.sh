@@ -4,9 +4,9 @@
 /etc/init.d/mariadb setup
 rc-status
 rc-service mariadb start
-mysql -e "CREATE DATABASE wordpress;"
+mysql -e "CREATE DATABASE wpdb;"
 mysql -e "CREATE USER 'admin'@'%' identified by 'admin';"
-mysql -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'admin'@'%';"
+mysql -e "GRANT ALL PRIVILEGES ON wpdb.* TO 'admin'@'%';"
 mysql -e "FLUSH PRIVILEGES;"
 rc-service mariadb stop
 
