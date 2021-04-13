@@ -1,14 +1,24 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: phpmyadmin-pod
+  name: phpmyadmin-deployment
   labels:
     app: phpmyadmin
 spec:
-  containers:
-  - name: phpmyadmin
-    image: rnakai/phpmyadmin:v1
-    imagePullPolicy: Never
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      name: phpmyadmin-pod
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+      - name: phpmyadmin
+        image: rnakai/phpmyadmin:v1
+        imagePullPolicy: Never
 
 ---
 

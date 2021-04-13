@@ -1,14 +1,24 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: wordpress-pod
+  name: wordpress-deployment
   labels:
     app: wordpress
 spec:
-  containers:
-    - name: wordpress
-      image: rnakai/wordpress:v1
-      imagePullPolicy: Never
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      name: wordpress-pod
+      labels:
+        app: wordpress
+    spec:
+      containers:
+        - name: wordpress
+          image: rnakai/wordpress:v1
+          imagePullPolicy: Never
 
 ---
 apiVersion: v1
