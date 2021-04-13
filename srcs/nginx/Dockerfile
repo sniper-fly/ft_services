@@ -35,9 +35,9 @@ RUN openssl genrsa \
 		-in ./certs/nginx.csr \
 		-out ./certs/nginx.crt
 
-COPY srcs/entry-point.sh /
-RUN chmod 755 /entry-point.sh
+COPY srcs/nginx_init.sh /
+RUN chmod 755 /nginx_init.sh
 
 COPY srcs/nginx.conf /etc/nginx/
 
-ENTRYPOINT [ "/entry-point.sh" ]
+ENTRYPOINT [ "/nginx_init.sh" ]

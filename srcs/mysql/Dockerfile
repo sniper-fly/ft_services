@@ -21,7 +21,7 @@ RUN sed -i'.bak' 's/^#rc_sys=""/rc_sys="lxc"/' /etc/rc.conf \
 RUN touch /var/log/mysqld.log \
 	&& chmod 666 /var/log/mysqld.log
 
-COPY ./srcs/entry-point.sh /
-RUN chmod 755 /entry-point.sh
+COPY ./srcs/mysql_init.sh /
+RUN chmod 755 /mysql_init.sh
 
-ENTRYPOINT [ "/entry-point.sh" ]
+ENTRYPOINT [ "/mysql_init.sh" ]
