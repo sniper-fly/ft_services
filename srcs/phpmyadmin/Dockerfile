@@ -58,7 +58,7 @@ WORKDIR /
 COPY srcs/nginx.conf /etc/nginx/
 RUN chmod 755 /etc/nginx/nginx.conf
 
-# copy nginx.conf
+# copy phpmyadmin conf
 COPY srcs/config.inc.php /www/phpmyadmin
 RUN chmod 644 /www/phpmyadmin/config.inc.php
 
