@@ -4,20 +4,9 @@ ENV GRAFANA_VERSION 7.5.4
 
 RUN apk update \
 	&& apk --no-cache add \
-	openrc \
 	openssl \
 	wget \
 	libc6-compat
-
-#openrcの初期設定, 何をやっているかは不明
-RUN sed -i'.bak' 's/^#rc_sys=""/rc_sys="lxc"/' /etc/rc.conf \
-    && sed -i 's/^#rc_provide="!net"/rc_provide="loopback net"/' /etc/rc.conf \
-    && sed -i'.bak' '/getty/d' /etc/inittab \
-    && sed -i'.bak' 's/mount -t tmpfs/# mount -t tmpfs/' /lib/rc/sh/init.sh \
-    && sed -i'.bak' 's/hostname $opts/# hostname $opts/' /etc/init.d/hostname \
-    && sed -i'.bak' 's/cgroup_add_service$/# cgroup_add_service/' /lib/rc/sh/openrc-run.sh \
-    && mkdir /run/openrc \
-    && touch /run/openrc/softlevel
 
 # download grafana
 RUN wget https://dl.grafana.com/oss/release/grafana-${GRAFANA_VERSION}.linux-amd64.tar.gz \
@@ -42,7 +31,7 @@ RUN openssl genrsa \
 WORKDIR /
 
 # copy grafana general setting
-COPY srcs/defaults.ini /grafana/conf
+COPY srcs/defaults.ini /grafana-${GRAFANA_VERSION}/conf/
 RUN chmod 644 /grafana-${GRAFANA_VERSION}/conf/defaults.ini
 
 # copy entrypoint
