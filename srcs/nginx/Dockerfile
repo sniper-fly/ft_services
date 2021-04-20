@@ -3,6 +3,8 @@ FROM alpine:3.13
 RUN apk update \
 	&& apk --no-cache add \
 		nginx \
+		wget \
+		libc6-compat \
 		openssl
 
 # for debug in container
@@ -25,6 +27,15 @@ RUN openssl genrsa \
 
 COPY srcs/nginx_init.sh /
 RUN chmod 755 /nginx_init.sh
+
+WORKDIR /
+# telegraf
+RUN wget https://dl.influxdata.com/telegraf/releases/telegraf-1.17.2_linux_amd64.tar.gz \
+	&& tar xf telegraf-1.17.2_linux_amd64.tar.gz \
+	&& rm telegraf-1.17.2_linux_amd64.tar.gz \
+	&& mkdir -p /etc/telegraf
+COPY ./srcs/telegraf.conf /etc/telegraf/telegraf.conf
+RUN chmod 777 /etc/telegraf/telegraf.conf
 
 COPY srcs/nginx.conf /etc/nginx/
 

@@ -10,6 +10,9 @@ mysql -e "GRANT ALL PRIVILEGES ON wpdb.* TO 'admin'@'%';"
 mysql -e "FLUSH PRIVILEGES;"
 rc-service mariadb stop
 
+#launch telegraf
+/telegraf-1.17.2/usr/bin/telegraf --config /etc/telegraf/telegraf.conf &
+
 #start mysqld
 /usr/bin/mysqld \
 	--user=mysql \

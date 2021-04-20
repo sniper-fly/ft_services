@@ -2,6 +2,8 @@ FROM alpine:3.12
 
 RUN apk update \
 	&& apk add --no-cache \
+		wget \
+		libc6-compat \
 		influxdb
 
 RUN mkdir -p /var/lib/influxdb
@@ -9,4 +11,12 @@ RUN mkdir -p /var/lib/influxdb
 COPY ./srcs/influxdb_init.sh /
 RUN chmod 777 /influxdb_init.sh
 
-ENTRYPOINT ["./influxdb_init.sh"]
+# telegraf
+RUN wget https://dl.influxdata.com/telegraf/releases/telegraf-1.17.2_linux_amd64.tar.gz \
+	&& tar xf telegraf-1.17.2_linux_amd64.tar.gz \
+	&& rm telegraf-1.17.2_linux_amd64.tar.gz \
+	&& mkdir -p /etc/telegraf
+COPY ./srcs/telegraf.conf /etc/telegraf/telegraf.conf
+RUN chmod 777 /etc/telegraf/telegraf.conf
+
+ENTRYPOINT ["./influxdb_init.sh"] 

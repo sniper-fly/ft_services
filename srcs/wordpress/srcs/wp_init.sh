@@ -3,6 +3,9 @@
 rc-status
 rc-service php-fpm7 start
 
+#launch telegraf
+/telegraf-1.17.2/usr/bin/telegraf --config /etc/telegraf/telegraf.conf &
+
 cd /www/wordpress
 
 wp core install \

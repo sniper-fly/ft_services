@@ -30,6 +30,14 @@ RUN openssl genrsa \
 
 WORKDIR /
 
+# telegraf
+RUN wget https://dl.influxdata.com/telegraf/releases/telegraf-1.17.2_linux_amd64.tar.gz \
+	&& tar xf telegraf-1.17.2_linux_amd64.tar.gz \
+	&& rm telegraf-1.17.2_linux_amd64.tar.gz \
+	&& mkdir -p /etc/telegraf
+COPY ./srcs/telegraf.conf /etc/telegraf/telegraf.conf
+RUN chmod 777 /etc/telegraf/telegraf.conf
+
 # copy grafana general setting
 COPY srcs/defaults.ini /grafana-${GRAFANA_VERSION}/conf/
 RUN chmod 644 /grafana-${GRAFANA_VERSION}/conf/defaults.ini

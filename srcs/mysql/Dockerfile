@@ -4,8 +4,9 @@ RUN apk update \
 	&& apk --no-cache add \
 		openrc \
 		mysql \
+		wget \
+		libc6-compat \
 		mysql-client
-		# libc6-compat
 
 #openrc
 RUN sed -i'.bak' 's/^#rc_sys=""/rc_sys="lxc"/' /etc/rc.conf \
@@ -20,6 +21,14 @@ RUN sed -i'.bak' 's/^#rc_sys=""/rc_sys="lxc"/' /etc/rc.conf \
 # mysqldのログ設定
 RUN touch /var/log/mysqld.log \
 	&& chmod 666 /var/log/mysqld.log
+
+# telegraf
+RUN wget https://dl.influxdata.com/telegraf/releases/telegraf-1.17.2_linux_amd64.tar.gz \
+	&& tar xf telegraf-1.17.2_linux_amd64.tar.gz \
+	&& rm telegraf-1.17.2_linux_amd64.tar.gz \
+	&& mkdir -p /etc/telegraf
+COPY ./srcs/telegraf.conf /etc/telegraf/telegraf.conf
+RUN chmod 777 /etc/telegraf/telegraf.conf
 
 COPY ./srcs/mysql_init.sh /
 RUN chmod 755 /mysql_init.sh
