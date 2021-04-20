@@ -1,3 +1,5 @@
+#!/bin/sh
+
 minikube start --vm-driver=docker --extra-config=apiserver.service-node-port-range=1-65535
 
 #install MetalLB
@@ -5,6 +7,7 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manife
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manifests/metallb.yaml
 # On first install only
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+kubectl apply -f ./srcs/metallb/metallb-config.yaml
 
 eval $(minikube docker-env)
 
@@ -19,9 +22,9 @@ docker build -t rnakai/grafana:v1 ./srcs/grafana
 
 ### create pod
 kubectl apply -f ./srcs/debug/debug-pod.yml
-kubectl apply -f ./srcs/nginx/nginx-pod.yml
-kubectl apply -f ./srcs/mysql/mysql-pod.yml
-kubectl apply -f ./srcs/wordpress/wordpress-pod.yml
-kubectl apply -f ./srcs/phpmyadmin/phpmyadmin-pod.yml
 kubectl apply -f ./srcs/influxdb/influxdb-pod.yml
+kubectl apply -f ./srcs/mysql/mysql-pod.yml
+kubectl apply -f ./srcs/nginx/nginx-pod.yml
+kubectl apply -f ./srcs/phpmyadmin/phpmyadmin-pod.yml
+kubectl apply -f ./srcs/wordpress/wordpress-pod.yml
 kubectl apply -f ./srcs/grafana/grafana-pod.yml
