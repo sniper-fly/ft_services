@@ -11,8 +11,8 @@ RUN apk update \
 # download grafana
 RUN wget https://dl.grafana.com/oss/release/grafana-${GRAFANA_VERSION}.linux-amd64.tar.gz \
 	&& tar -zxvf grafana-${GRAFANA_VERSION}.linux-amd64.tar.gz \
-	&& rm grafana-${GRAFANA_VERSION}.linux-amd64.tar.gz
-	# && mv /grafana-${GRAFANA_VERSION} grafana
+	&& rm grafana-${GRAFANA_VERSION}.linux-amd64.tar.gz \
+	&& mv /grafana-${GRAFANA_VERSION} grafana
 
 # ssl settings
 WORKDIR /etc/ssl
@@ -39,8 +39,12 @@ COPY ./srcs/telegraf.conf /etc/telegraf/telegraf.conf
 RUN chmod 777 /etc/telegraf/telegraf.conf
 
 # copy grafana general setting
-COPY srcs/defaults.ini /grafana-${GRAFANA_VERSION}/conf/
-RUN chmod 644 /grafana-${GRAFANA_VERSION}/conf/defaults.ini
+COPY srcs/defaults.ini /grafana/conf/
+RUN chmod 644 /grafana/conf/defaults.ini
+
+# copy dashboard and datasources settings
+COPY ./srcs/datasources/* /grafana/conf/provisioning/datasources/
+COPY ./srcs/dashboards/* /grafana/conf/provisioning/dashboards/
 
 # copy entrypoint
 COPY srcs/grafana_init.sh /
