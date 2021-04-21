@@ -1,0 +1,33 @@
+apiVersion: 1
+
+datasources:
+  - name: grafana
+    type: influxdb
+    access: proxy
+    database: grafana
+    url: http://influxdb-service:8086
+  - name: influxdb
+    type: influxdb
+    access: proxy
+    database: influxdb
+    url: http://influxdb-service:8086
+  - name: mysql
+    type: influxdb
+    access: proxy
+    database: mysql
+    url: http://influxdb-service:8086
+  - name: nginx
+    type: influxdb
+    access: proxy
+    database: nginx
+    url: http://influxdb-service:8086
+  - name: phpmyadmin
+    type: influxdb
+    access: proxy
+    database: phpmyadmin
+    url: http://influxdb-service:8086
+  - name: wordpress
+    type: influxdb
+    access: proxy
+    database: wordpress
+    url: http://influxdb-service:8086
