@@ -19,6 +19,13 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
+        volumeMounts:
+        - mountPath: /var/lib/influxdb
+          name: influxdb-persistent-storage
+      volumes:
+      - name: influxdb-persistent-storage
+        persistentVolumeClaim:
+          claimName: influxdb-pvc
 ---
 
 apiVersion: v1
@@ -31,13 +38,11 @@ spec:
   selector:
     app: influxdb
   type: ClusterIP
-  # type: LoadBalancer
   ports:
   - port: 8086
     name: influxdb
     protocol: TCP
     targetPort: 8086
-    # nodePort: 8086 #####
 
 ---
 
