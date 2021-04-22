@@ -1,6 +1,6 @@
 FROM alpine:3.13
 
-ENV GRAFANA_VERSION 7.5.4
+ENV GRAFANA_VERSION 7.4.5
 
 RUN apk update \
 	&& apk --no-cache add \
