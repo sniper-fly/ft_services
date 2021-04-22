@@ -1,3 +1,4 @@
+
 {
   "annotations": {
     "list": [
@@ -12,7 +13,7 @@
       }
     ]
   },
-  "description": "wordpress dashboard",
+  "description": "phpmyadmin dashboard",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
@@ -20,7 +21,7 @@
   "links": [],
   "panels": [
     {
-      "datasource": "wordpress",
+      "datasource": "phpmyadmin",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -128,7 +129,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "wordpress",
+      "datasource": "phpmyadmin",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -249,7 +250,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "wordpress",
+  "title": "phpmyadmin",
   "uid": null,
   "version": 0
 }

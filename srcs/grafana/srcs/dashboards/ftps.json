@@ -12,7 +12,7 @@
       }
     ]
   },
-  "description": "wordpress dashboard",
+  "description": "ftps dashboard",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
@@ -20,7 +20,7 @@
   "links": [],
   "panels": [
     {
-      "datasource": "wordpress",
+      "datasource": "ftps",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -128,7 +128,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "wordpress",
+      "datasource": "ftps",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -249,7 +249,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "wordpress",
+  "title": "ftps",
   "uid": null,
   "version": 0
 }

@@ -12,7 +12,7 @@
       }
     ]
   },
-  "description": "wordpress dashboard",
+  "description": "grafana dashboard",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
@@ -20,7 +20,7 @@
   "links": [],
   "panels": [
     {
-      "datasource": "wordpress",
+      "datasource": "grafana",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -128,7 +128,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "wordpress",
+      "datasource": "grafana",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -249,7 +249,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "wordpress",
+  "title": "grafana",
   "uid": null,
   "version": 0
 }

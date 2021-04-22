@@ -12,7 +12,7 @@
       }
     ]
   },
-  "description": "wordpress dashboard",
+  "description": "mysql dashboard",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
@@ -20,7 +20,7 @@
   "links": [],
   "panels": [
     {
-      "datasource": "wordpress",
+      "datasource": "mysql",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -128,7 +128,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "wordpress",
+      "datasource": "mysql",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -249,7 +249,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "wordpress",
+  "title": "mysql",
   "uid": null,
   "version": 0
 }
