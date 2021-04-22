@@ -8,8 +8,8 @@ RUN apk update \
 
 RUN mkdir -p /var/lib/influxdb
 
-COPY ./srcs/influxdb_init.sh /
-RUN chmod 777 /influxdb_init.sh
+COPY ./srcs/influx_init.sh /
+RUN chmod 777 /influx_init.sh
 
 # telegraf
 RUN wget https://dl.influxdata.com/telegraf/releases/telegraf-1.17.2_linux_amd64.tar.gz \
@@ -19,4 +19,4 @@ RUN wget https://dl.influxdata.com/telegraf/releases/telegraf-1.17.2_linux_amd64
 COPY ./srcs/telegraf.conf /etc/telegraf/telegraf.conf
 RUN chmod 777 /etc/telegraf/telegraf.conf
 
-ENTRYPOINT ["./influxdb_init.sh"] 
+ENTRYPOINT ["./influx_init.sh"] 
