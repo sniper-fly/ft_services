@@ -19,6 +19,7 @@ docker build -t rnakai/wordpress:v1 ./srcs/wordpress
 docker build -t rnakai/phpmyadmin:v1 ./srcs/phpmyadmin
 docker build -t rnakai/influxdb:v1 ./srcs/influxdb
 docker build -t rnakai/grafana:v1 ./srcs/grafana
+docker build -t rnakai/ftps:v1 ./srcs/ftps
 
 ### create pod
 kubectl apply -f ./srcs/debug/debug-pod.yml
@@ -28,3 +29,4 @@ kubectl apply -f ./srcs/nginx/nginx-pod.yml
 kubectl apply -f ./srcs/phpmyadmin/phpmyadmin-pod.yml
 kubectl apply -f ./srcs/wordpress/wordpress-pod.yml
 kubectl apply -f ./srcs/grafana/grafana-pod.yml
+kubectl apply -f ./srcs/ftps/ftps-pod.yml
