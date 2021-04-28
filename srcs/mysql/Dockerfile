@@ -33,4 +33,8 @@ RUN chmod 777 /etc/telegraf/telegraf.conf
 COPY ./srcs/mysql_init.sh /
 RUN chmod 755 /mysql_init.sh
 
+# copy livenessprobe shell
+COPY ./srcs/livenessprobe.sh /
+RUN chmod 755 /livenessprobe.sh
+
 ENTRYPOINT [ "/mysql_init.sh" ]

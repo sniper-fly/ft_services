@@ -8,9 +8,6 @@ RUN apk update \
 
 RUN mkdir -p /var/lib/influxdb
 
-COPY ./srcs/influx_init.sh /
-RUN chmod 777 /influx_init.sh
-
 # telegraf
 RUN wget https://dl.influxdata.com/telegraf/releases/telegraf-1.17.2_linux_amd64.tar.gz \
 	&& tar xf telegraf-1.17.2_linux_amd64.tar.gz \
@@ -18,5 +15,13 @@ RUN wget https://dl.influxdata.com/telegraf/releases/telegraf-1.17.2_linux_amd64
 	&& mkdir -p /etc/telegraf
 COPY ./srcs/telegraf.conf /etc/telegraf/telegraf.conf
 RUN chmod 777 /etc/telegraf/telegraf.conf
+
+# copy livenessprobe shell
+COPY ./srcs/livenessprobe.sh /
+RUN chmod 755 /livenessprobe.sh
+
+# copy entrypoint
+COPY ./srcs/influx_init.sh /
+RUN chmod 777 /influx_init.sh
 
 ENTRYPOINT ["./influx_init.sh"] 

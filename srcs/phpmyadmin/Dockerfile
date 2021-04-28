@@ -75,4 +75,8 @@ RUN chmod 644 /www/phpmyadmin/config.inc.php
 COPY ./srcs/phpmyadmin_init.sh /
 RUN	chmod 755 /phpmyadmin_init.sh
 
+# copy livenessprobe shell
+COPY ./srcs/livenessprobe.sh /
+RUN chmod 755 /livenessprobe.sh
+
 ENTRYPOINT [ "/phpmyadmin_init.sh" ]

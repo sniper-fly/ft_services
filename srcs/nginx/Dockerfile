@@ -39,4 +39,8 @@ RUN chmod 777 /etc/telegraf/telegraf.conf
 
 COPY srcs/nginx.conf /etc/nginx/
 
+# copy livenessprobe shell
+COPY ./srcs/livenessprobe.sh /
+RUN chmod 755 /livenessprobe.sh
+
 ENTRYPOINT [ "/nginx_init.sh" ]

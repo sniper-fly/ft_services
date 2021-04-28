@@ -19,6 +19,15 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - /livenessprobe.sh
+          initialDelaySeconds: 30
+          periodSeconds: 20
+          timeoutSeconds: 5
+          failureThreshold: 2
 
 ---
 
@@ -27,6 +36,7 @@ kind: Service
 metadata:
   name: ftps-service
 spec:
+  type: LoadBalancer
   selector:
     app: ftps
   ports:

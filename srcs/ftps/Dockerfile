@@ -44,6 +44,10 @@ RUN chmod 644 /etc/vsftpd/vsftpd.conf
 COPY ./srcs/.lftprc /home/ftptest/
 RUN chmod 644 /home/ftptest/.lftprc
 
+# copy livenessprobe shell
+COPY ./srcs/livenessprobe.sh /
+RUN chmod 755 /livenessprobe.sh
+
 # copy entrypoint
 COPY srcs/ftps_init.sh /
 RUN chmod 755 /ftps_init.sh

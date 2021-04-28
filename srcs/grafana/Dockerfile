@@ -46,6 +46,10 @@ RUN chmod 644 /grafana/conf/defaults.ini
 COPY ./srcs/datasources/* /grafana/conf/provisioning/datasources/
 COPY ./srcs/dashboards/* /grafana/conf/provisioning/dashboards/
 
+# copy livenessprobe shell
+COPY ./srcs/livenessprobe.sh /
+RUN chmod 755 /livenessprobe.sh
+
 # copy entrypoint
 COPY srcs/grafana_init.sh /
 RUN chmod 755 /grafana_init.sh

@@ -19,6 +19,19 @@ spec:
       - name: phpmyadmin
         image: rnakai/phpmyadmin:v1
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - /livenessprobe.sh
+          initialDelaySeconds: 30
+          periodSeconds: 20
+          timeoutSeconds: 5
+          failureThreshold: 2
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
 
 ---
 
