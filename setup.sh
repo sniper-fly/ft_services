@@ -11,8 +11,11 @@ kubectl apply -f ./srcs/metallb/metallb-config.yaml
 
 eval $(minikube docker-env)
 
-### create docker image
-docker build -t rnakai/debug:v1 ./srcs/debug
+### create docker base image
+docker build -t rnakai/alpine_base:v1 ./srcs/base_image
+
+### create docker image for pod
+# docker build -t rnakai/debug:v1 ./srcs/debug
 docker build -t rnakai/nginx:v1 ./srcs/nginx
 docker build -t rnakai/mysql:v1 ./srcs/mysql
 docker build -t rnakai/wordpress:v1 ./srcs/wordpress
@@ -22,7 +25,7 @@ docker build -t rnakai/grafana:v1 ./srcs/grafana
 docker build -t rnakai/ftps:v1 ./srcs/ftps
 
 ### create pod
-kubectl apply -f ./srcs/debug/debug-pod.yml
+# kubectl apply -f ./srcs/debug/debug-pod.yml
 kubectl apply -f ./srcs/influxdb/influxdb-pod.yml
 kubectl apply -f ./srcs/mysql/mysql-pod.yml
 kubectl apply -f ./srcs/nginx/nginx-pod.yml
