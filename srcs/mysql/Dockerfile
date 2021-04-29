@@ -1,11 +1,8 @@
-FROM alpine:3.13
+FROM rnakai/alpine_base:v1
 
-RUN apk update \
-	&& apk --no-cache add \
+RUN apk --no-cache add \
 		openrc \
 		mysql \
-		wget \
-		libc6-compat \
 		mysql-client
 
 #openrc
@@ -22,19 +19,17 @@ RUN sed -i'.bak' 's/^#rc_sys=""/rc_sys="lxc"/' /etc/rc.conf \
 RUN touch /var/log/mysqld.log \
 	&& chmod 666 /var/log/mysqld.log
 
-# telegraf
-RUN wget https://dl.influxdata.com/telegraf/releases/telegraf-1.17.2_linux_amd64.tar.gz \
-	&& tar xf telegraf-1.17.2_linux_amd64.tar.gz \
-	&& rm telegraf-1.17.2_linux_amd64.tar.gz \
-	&& mkdir -p /etc/telegraf
+##########################
+#### common settings #####
+##########################
+# copy telegraf.conf
 COPY ./srcs/telegraf.conf /etc/telegraf/telegraf.conf
 RUN chmod 777 /etc/telegraf/telegraf.conf
 
-COPY ./srcs/mysql_init.sh /
-RUN chmod 755 /mysql_init.sh
+# copy entrypoint
+COPY srcs/entrypoint.sh /
+RUN chmod 755 /entrypoint.sh
 
 # copy livenessprobe shell
 COPY ./srcs/livenessprobe.sh /
 RUN chmod 755 /livenessprobe.sh
-
-ENTRYPOINT [ "/mysql_init.sh" ]

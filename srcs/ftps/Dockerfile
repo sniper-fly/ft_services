@@ -1,36 +1,8 @@
-FROM alpine:3.13
+FROM rnakai/alpine_base:v1
 
-RUN apk update \
-	&& apk --no-cache add \
+RUN apk --no-cache add \
 	vsftpd \
-	lftp \
-	openssl \
-	wget \
-	libc6-compat
-
-# ssl settings
-WORKDIR /etc/ssl
-RUN openssl genrsa \
-		-out ./private/ftps.key 2048 \
-	&& openssl req -new \
-		-key ./private/ftps.key \
-		-out ./certs/ftps.csr \
-		-subj "/C=JP/ST=Tokyo/L=Roppongi/O=42tokyo/OU=level3/CN=rnakai" \
-	&& openssl x509 \
-		-days 3650 \
-		-req -signkey ./private/ftps.key \
-		-in ./certs/ftps.csr \
-		-out ./certs/ftps.crt
-
-WORKDIR /
-
-# telegraf
-RUN wget https://dl.influxdata.com/telegraf/releases/telegraf-1.17.2_linux_amd64.tar.gz \
-	&& tar xf telegraf-1.17.2_linux_amd64.tar.gz \
-	&& rm telegraf-1.17.2_linux_amd64.tar.gz \
-	&& mkdir -p /etc/telegraf
-COPY ./srcs/telegraf.conf /etc/telegraf/telegraf.conf
-RUN chmod 777 /etc/telegraf/telegraf.conf
+	lftp
 
 # create user
 RUN adduser -D ftptest \
@@ -44,12 +16,17 @@ RUN chmod 644 /etc/vsftpd/vsftpd.conf
 COPY ./srcs/.lftprc /home/ftptest/
 RUN chmod 644 /home/ftptest/.lftprc
 
+##########################
+#### common settings #####
+##########################
+# copy telegraf.conf
+COPY ./srcs/telegraf.conf /etc/telegraf/telegraf.conf
+RUN chmod 777 /etc/telegraf/telegraf.conf
+
+# copy entrypoint
+COPY srcs/entrypoint.sh /
+RUN chmod 755 /entrypoint.sh
+
 # copy livenessprobe shell
 COPY ./srcs/livenessprobe.sh /
 RUN chmod 755 /livenessprobe.sh
-
-# copy entrypoint
-COPY srcs/ftps_init.sh /
-RUN chmod 755 /ftps_init.sh
-
-ENTRYPOINT [ "/ftps_init.sh" ]

@@ -1,13 +1,9 @@
-FROM alpine:3.13
+FROM rnakai/alpine_base:v1
 
 # https://wiki.alpinelinux.org/wiki/PhpMyAdmin
-RUN apk update \
-	&& apk add \
+RUN apk --no-cache add \
 		openrc \
-		openssl \
 		nginx \
-		wget \
-		libc6-compat \
 		mysql \
 		mysql-client \
 		php-mbstring \
@@ -39,29 +35,7 @@ RUN wget http://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-5.0.2-a
 	&& chown -R www:www phpmyadmin \
 	&& chmod -R 777 /www
 
-# nginxで使うhttpsのための設定
-WORKDIR /etc/ssl
-RUN openssl genrsa \
-		-out ./private/phpmyadmin.key 2048 \
-	&& openssl req -new \
-		-key ./private/phpmyadmin.key \
-		-out ./certs/phpmyadmin.csr \
-		-subj "/C=JP/ST=Tokyo/L=Roppongi/O=42tokyo/OU=level3/CN=rnakai" \
-	&& openssl x509 \
-		-days 3650 \
-		-req -signkey ./private/phpmyadmin.key \
-		-in ./certs/phpmyadmin.csr \
-		-out ./certs/phpmyadmin.crt
-
 WORKDIR /
-
-# telegraf
-RUN wget https://dl.influxdata.com/telegraf/releases/telegraf-1.17.2_linux_amd64.tar.gz \
-	&& tar xf telegraf-1.17.2_linux_amd64.tar.gz \
-	&& rm telegraf-1.17.2_linux_amd64.tar.gz \
-	&& mkdir -p /etc/telegraf
-COPY ./srcs/telegraf.conf /etc/telegraf/telegraf.conf
-RUN chmod 777 /etc/telegraf/telegraf.conf
 
 # copy nginx.conf
 COPY srcs/nginx.conf /etc/nginx/
@@ -71,12 +45,18 @@ RUN chmod 755 /etc/nginx/nginx.conf
 COPY srcs/config.inc.php /www/phpmyadmin
 RUN chmod 644 /www/phpmyadmin/config.inc.php
 
+
+##########################
+#### common settings #####
+##########################
+# copy telegraf.conf
+COPY ./srcs/telegraf.conf /etc/telegraf/telegraf.conf
+RUN chmod 777 /etc/telegraf/telegraf.conf
+
 # copy entrypoint
-COPY ./srcs/phpmyadmin_init.sh /
-RUN	chmod 755 /phpmyadmin_init.sh
+COPY srcs/entrypoint.sh /
+RUN chmod 755 /entrypoint.sh
 
 # copy livenessprobe shell
 COPY ./srcs/livenessprobe.sh /
 RUN chmod 755 /livenessprobe.sh
-
-ENTRYPOINT [ "/phpmyadmin_init.sh" ]
