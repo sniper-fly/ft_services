@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title> ft_services review readme </title>
+	</head>
+	<body>
+		<h1>Hello ft_services!!<br></h1>
+		<h1>Review readme<br></h1>
+
+<h2>Link</h2>
+
+<p>nginx, port 443, 80</p>
+<a href="https://192.168.49.2">https://192.168.49.2</a>
+<p>httpsからhttpにして、 http://192.168.49.2/wordpress と入力するとhttpsにリダイレクトされます。</p>
+<p>https://192.168.49.2/wordpress と入力すると5050ポートにリダイレクトされます。</p>
+<p>https://192.168.49.2/phpmyadmin と入力すると5000ポートに対してリバースプロキシされます。</p>
+<br>
+
+<p>wordpress port 5050</p>
+<a href="https://192.168.49.2:5050">https://192.168.49.2:5050</a><br>
+<a href="https://192.168.49.2:5050/wp-admin">https://192.168.49.2:5050/wp-admin</a>
+<p>wordpressのログイン画面, admin, adminでログインできます。</p>
+<br>
+
+<p>phpmyadmin port 5000</p>
+<a href="https://192.168.49.2:5000">https://192.168.49.2:5000</a>
+<p>admin, adminでログインできます。</p>
+<br>
+
+<p>grafana port 3000</p>
+<a href="https://192.168.49.2:3000">https://192.168.49.2:3000</a>
+<p>admin, adminでログインできます。</p>
+<br>
+
+<h2>Useful Commands</h2>
+<pre><code>
+#kubectl command
+kubectl get pod
+kubectl get svc
+kubectl get all
+kubectl describe pod/<pod名>
+minikube dashboard #（dashboardの起動）
+</code></pre>
+
+
+	</body>
+</html>
+<!-- 192.168.49.2 -->
+<!-- レビュー項目
+podが消えても復活するか -->
+
+
