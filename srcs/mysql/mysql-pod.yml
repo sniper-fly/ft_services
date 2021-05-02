@@ -45,9 +45,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-    name: mysql-service
-    labels:
-      app: mysql
+  name: mysql-service
+  labels:
+    app: mysql
+  annotations:
+    metallb.universe.tf/allow-shared-ip: shared
 spec:
   selector:
     app: mysql
