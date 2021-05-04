@@ -35,12 +35,25 @@
 
 <h2>Useful Commands</h2>
 <pre><code>
-#kubectl command
+## kubectl command
 kubectl get pod
 kubectl get svc
 kubectl get all
 kubectl describe pod/<pod名>
 minikube dashboard #（dashboardの起動）
+
+
+kubectl exec deploy/influxdb-deployment -- pkill influxd
+
+## ftps command
+
+ftp接続
+lftp -e "set ssl:verify-certificate no" ftp://ftptest@192.168.49.200
+
+get file名 (remoteからファイルをダウンロード)
+
+put file名 (localからファイルをアップロード)
+
 </code></pre>
 
 
