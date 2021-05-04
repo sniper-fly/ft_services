@@ -49,4 +49,3 @@ spec:
     name: wordpress
     protocol: TCP
     targetPort: 5050
-    nodePort: 5050

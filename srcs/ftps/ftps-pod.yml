@@ -57,12 +57,10 @@ spec:
     protocol: TCP
     port: 21
     targetPort: 21
-    nodePort: 21
   - name: pasv-min
     protocol: TCP
     port: 30020
     targetPort: 30020
-    nodePort: 30020
   - name: pasv-max
     protocol: TCP
     port: 30021

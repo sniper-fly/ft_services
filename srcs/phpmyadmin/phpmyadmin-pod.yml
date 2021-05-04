@@ -50,4 +50,3 @@ spec:
     name: phpmyadmin
     protocol: TCP
     targetPort: 5000
-    nodePort: 5000
