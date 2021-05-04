@@ -25,9 +25,9 @@ spec:
             - sh
             - /livenessprobe.sh
           initialDelaySeconds: 30
-          periodSeconds: 20
+          periodSeconds: 10
           timeoutSeconds: 5
-          failureThreshold: 2
+          failureThreshold: 1
         volumeMounts:
         - mountPath: /var/lib/influxdb
           name: influxdb-persistent-storage
