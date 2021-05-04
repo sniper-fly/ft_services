@@ -18,8 +18,8 @@ COPY ./srcs/.lftprc /home/ftptest/
 RUN chmod 644 /home/ftptest/.lftprc
 
 # create vsftpd.log, etc.
-RUN touch /var/log/vsftpd.log \
-	&& echo "ftptest" >> /etc/vsftpd/vsftpd.userlist
+RUN touch /var/log/vsftpd.log
+	# && echo "ftptest" >> /etc/vsftpd/vsftpd.userlist
 
 ##########################
 #### common settings #####
