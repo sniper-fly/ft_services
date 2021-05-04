@@ -7,14 +7,19 @@ RUN apk --no-cache add \
 # create user
 RUN adduser -D ftptest \
 	&& echo "ftptest:ftptest" | chpasswd
+	# && chmod -R 777 /home/ftptest
 
 # cp vsftpd setting
 COPY ./srcs/vsftpd.conf /etc/vsftpd/vsftpd.conf
-RUN chmod 644 /etc/vsftpd/vsftpd.conf
+RUN chmod 777 /etc/vsftpd/vsftpd.conf
 
-# cp vsftpd setting
+# cp lftp setting
 COPY ./srcs/.lftprc /home/ftptest/
 RUN chmod 644 /home/ftptest/.lftprc
+
+# create vsftpd.log, etc.
+RUN touch /var/log/vsftpd.log \
+	&& echo "ftptest" >> /etc/vsftpd/vsftpd.userlist
 
 ##########################
 #### common settings #####
