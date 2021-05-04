@@ -9,7 +9,7 @@ rc-service php-fpm7 start
 cd /www/wordpress
 
 wp core install \
-	--url=https://192.168.49.2:5050 \
+	--url=https://192.168.49.200:5050 \
 	--title=test \
 	--admin_user=admin \
 	--admin_password=admin \
