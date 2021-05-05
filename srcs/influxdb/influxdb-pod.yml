@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: influxdb-deployment
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: influxdb
@@ -29,7 +30,7 @@ spec:
           timeoutSeconds: 5
           failureThreshold: 1
         volumeMounts:
-        - mountPath: /var/lib/influxdb
+        - mountPath: /root/.influxdb/
           name: influxdb-persistent-storage
       volumes:
       - name: influxdb-persistent-storage
@@ -63,8 +64,25 @@ kind: PersistentVolumeClaim
 metadata:
   name: influxdb-pvc
 spec:
+  # storageClassName: slow
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
+
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: influxdb-volume
+# spec:
+#   storageClassName: slow
+#   accessModes:
+#   - ReadWriteOnce
+#   capacity:
+#     storage: 1Gi
+#   persistentVolumeReclaimPolicy: Retain
+#   hostPath:
+#     path: /data/pv01
+#     type: Directory
