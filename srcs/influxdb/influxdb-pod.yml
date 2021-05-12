@@ -16,9 +16,6 @@ spec:
       - name: influxdb
         image: rnakai/influxdb:v1
         imagePullPolicy: Never
-        resources:
-          limits:
-            memory: "500Mi"
         livenessProbe:
           exec:
             command:

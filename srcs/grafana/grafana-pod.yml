@@ -15,9 +15,6 @@ spec:
       - name: grafana
         image: rnakai/grafana:v1
         imagePullPolicy: Never
-        resources:
-          limits:
-            memory: "128Mi"
         livenessProbe:
           exec:
             command:

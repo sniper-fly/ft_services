@@ -28,9 +28,6 @@ spec:
           periodSeconds: 20
           timeoutSeconds: 5
           failureThreshold: 2
-        resources:
-          limits:
-            memory: "128Mi"
 
 ---
 

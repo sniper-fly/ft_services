@@ -23,9 +23,6 @@ spec:
           name: pasv-min
         - containerPort: 30021
           name: pasv-max
-        resources:
-          limits:
-            memory: "300Mi"
         livenessProbe:
           exec:
             command:
